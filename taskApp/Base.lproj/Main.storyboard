@@ -19,9 +19,14 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dm9-1r-bgm">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <searchBar key="tableHeaderView" contentMode="redraw" id="oqL-aD-2p8">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="211-Mj-Psc">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="68.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="211-Mj-Psc" id="AdD-f2-KPy">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
@@ -48,6 +53,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="mySearchBar" destination="oqL-aD-2p8" id="XFC-NE-Y74"/>
                         <outlet property="tableView" destination="dm9-1r-bgm" id="Ux5-nr-rly"/>
                         <segue destination="IWJ-XM-Jj7" kind="show" identifier="cellSegue" id="dxY-fe-3Zh"/>
                     </connections>
@@ -64,7 +70,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t1m-5X-xFY">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="タイトル" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t1m-5X-xFY">
                                 <rect key="frame" x="10" y="98" width="394" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -75,7 +81,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vvr-s6-bJd">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="内容" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vvr-s6-bJd">
                                 <rect key="frame" x="10" y="173" width="394" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -98,6 +104,17 @@
                                     <constraint firstAttribute="height" constant="120" id="IVj-aH-HTt"/>
                                 </constraints>
                             </datePicker>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="カテゴリー" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HBg-aB-b1Z">
+                                <rect key="frame" x="10" y="464" width="394" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="b8R-xU-xeT">
+                                <rect key="frame" x="10" y="495" width="394" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="2Hb-hG-G4H"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -105,22 +122,29 @@
                             <constraint firstItem="2Hb-hG-G4H" firstAttribute="trailing" secondItem="Vvr-s6-bJd" secondAttribute="trailing" constant="10" id="1p4-vG-P6O"/>
                             <constraint firstItem="tQy-kM-Ncr" firstAttribute="top" secondItem="t1m-5X-xFY" secondAttribute="bottom" constant="10" id="2BH-qE-amZ"/>
                             <constraint firstItem="KGe-lk-Bab" firstAttribute="top" secondItem="oko-BC-8Hq" secondAttribute="bottom" constant="10" id="8F8-MQ-mpI"/>
+                            <constraint firstItem="2Hb-hG-G4H" firstAttribute="trailing" secondItem="b8R-xU-xeT" secondAttribute="trailing" constant="10" id="AsQ-oT-PtQ"/>
+                            <constraint firstItem="b8R-xU-xeT" firstAttribute="top" secondItem="HBg-aB-b1Z" secondAttribute="bottom" constant="10" id="CGy-SY-Pvd"/>
+                            <constraint firstItem="b8R-xU-xeT" firstAttribute="leading" secondItem="2Hb-hG-G4H" secondAttribute="leading" constant="10" id="Iht-d6-sPl"/>
                             <constraint firstItem="2Hb-hG-G4H" firstAttribute="trailing" secondItem="tQy-kM-Ncr" secondAttribute="trailing" constant="10" id="KGO-Pt-KRc"/>
                             <constraint firstItem="oko-BC-8Hq" firstAttribute="top" secondItem="Vvr-s6-bJd" secondAttribute="bottom" constant="10" id="NRF-4T-FnK"/>
+                            <constraint firstItem="2Hb-hG-G4H" firstAttribute="trailing" secondItem="HBg-aB-b1Z" secondAttribute="trailing" constant="10" id="Oni-bu-wyj"/>
                             <constraint firstItem="t1m-5X-xFY" firstAttribute="top" secondItem="2Hb-hG-G4H" secondAttribute="top" constant="10" id="P4a-W5-tUA"/>
                             <constraint firstItem="t1m-5X-xFY" firstAttribute="leading" secondItem="2Hb-hG-G4H" secondAttribute="leading" constant="10" id="T70-YQ-0Es"/>
                             <constraint firstItem="2Hb-hG-G4H" firstAttribute="trailing" secondItem="t1m-5X-xFY" secondAttribute="trailing" constant="10" id="ZlJ-ka-aNp"/>
                             <constraint firstItem="KGe-lk-Bab" firstAttribute="trailing" secondItem="2Hb-hG-G4H" secondAttribute="trailing" id="aZ9-xx-ypI"/>
                             <constraint firstItem="tQy-kM-Ncr" firstAttribute="leading" secondItem="2Hb-hG-G4H" secondAttribute="leading" constant="10" id="edd-ah-5hu"/>
+                            <constraint firstItem="HBg-aB-b1Z" firstAttribute="leading" secondItem="2Hb-hG-G4H" secondAttribute="leading" constant="10" id="h52-43-n8P"/>
                             <constraint firstItem="KGe-lk-Bab" firstAttribute="leading" secondItem="2Hb-hG-G4H" secondAttribute="leading" id="ncL-rR-zBt"/>
                             <constraint firstItem="oko-BC-8Hq" firstAttribute="leading" secondItem="2Hb-hG-G4H" secondAttribute="leading" constant="10" id="nlE-x3-NN7"/>
                             <constraint firstItem="2Hb-hG-G4H" firstAttribute="trailing" secondItem="oko-BC-8Hq" secondAttribute="trailing" constant="10" id="o2a-Ds-NBK"/>
                             <constraint firstItem="Vvr-s6-bJd" firstAttribute="leading" secondItem="2Hb-hG-G4H" secondAttribute="leading" constant="10" id="p8P-Rq-sj4"/>
                             <constraint firstItem="Vvr-s6-bJd" firstAttribute="top" secondItem="tQy-kM-Ncr" secondAttribute="bottom" constant="10" id="t7P-hT-89b"/>
+                            <constraint firstItem="HBg-aB-b1Z" firstAttribute="top" secondItem="KGe-lk-Bab" secondAttribute="bottom" constant="10" id="y2U-wA-TXf"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MKI-Kd-MH7"/>
                     <connections>
+                        <outlet property="cateTextField" destination="b8R-xU-xeT" id="8sp-ao-QWB"/>
                         <outlet property="contentTextView" destination="oko-BC-8Hq" id="PKo-1N-uZs"/>
                         <outlet property="datePicker" destination="KGe-lk-Bab" id="Cyo-DF-PfI"/>
                         <outlet property="titleTextField" destination="tQy-kM-Ncr" id="Enz-35-COE"/>
