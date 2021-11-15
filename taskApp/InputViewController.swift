@@ -29,7 +29,7 @@ class InputViewController: UIViewController {
         titleTextField.text = task.title
         contentTextView.text = task.contents
         datePicker.date = task.date
- //     cateTextField.text = task.category
+        cateTextField.text = task.category
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -38,7 +38,7 @@ class InputViewController: UIViewController {
             task.title = titleTextField.text!
             task.contents = contentTextView.text
             task.date = datePicker.date
- //           task.category = cateTextField.text!
+            task.category = cateTextField.text!
             realm.add(task, update: .modified)
             
         }

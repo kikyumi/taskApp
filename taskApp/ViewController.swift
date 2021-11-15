@@ -51,8 +51,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let dateString: String = formatter.string(from: task.date)
         cell.detailTextLabel?.text = dateString
         
-        
-        
         return cell
     }
     
@@ -115,20 +113,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             }
             }
         }
-
+    }
+    
     //検索機能の追加
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
         if searchText == "" {
             taskArray = realm.objects(Task.self).sorted(byKeyPath: "date", ascending: true)
         }else {
-            let predicate = NSPredicate(format: "title contains [c] %@", searchText)  //titleを検索
+            let predicate = NSPredicate(format: "category contains [c] %@", searchText)
             taskArray = realm.objects(Task.self).filter(predicate).sorted(byKeyPath: "date", ascending: true)
         }
         tableView.reloadData()
     }
-        
-
-
-
- }
+    
 }
